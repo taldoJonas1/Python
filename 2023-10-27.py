@@ -86,14 +86,18 @@ IMC = peso / altura2
 passado como parâmetro e retornar o resultado.
 '''
 def tabuada(n):
-    for i in range(10):
-        result = 0
-        result = n * i
-        print(f'{n} x {i} = {result}')
+    if n != 0:
+        for i in range(10):
+            result = 0
+            result = n * (i + 1)
+            print(f'{n} x {i+1} = {result}')
+        print('\n')
+    else:
+        print('PROGRAMA CANCELADO\n')
 
 def imc(p, h):
     result = p / (h**2)
-    print(f'Seu IMC: {result}')
+    print(f'Seu IMC: {result:.2f}\n')
 
 def fatorial(n):
     nro = n
@@ -101,25 +105,27 @@ def fatorial(n):
     for n in range(n, 1, -1):
         fat *= n
     
-    print(f'O fatorial de {nro} é {fat}')
+    print(f'O fatorial de {nro} é {fat}\n')
 
 opcao = int(input('MENU DE EXERCICIOS\n==================\n[1]TABUADA\n[2]IMC\n[3]FATORIAL\n[-1]ENCERRA PROGRAMA\nESCOLHA: '))
-match opcao:
-    case -1:
-        print('PROGRAMA ENCERRADO')
-    case 1:
-        n1 = int(input('Digite um nro de 1 a 9: '))
-        while 1 > n1 > 9:
-            n1 = int(input('ERRO\nInsira um nro entre 1 e 9: ')) 
-        resp = tabuada(n1)
-    case 2:
-        peso = float(input('Insira seu peso (kg): '))
-        altura = float(input('Insira seu peso (m): '))
-        resp = imc(peso, altura)
-    case 3:
-        nro = int(input('Digite um nro: '))
-        while nro <= 0:
-            nro = int(input('Digite um nro maior que 0: '))
-        resp = fatorial(nro)
-    case _:
-        print('ESCOLHA UM NRO QUE ESTÁ NO MENU')
+while opcao > -1:
+    match opcao:
+        case -1:
+            print('PROGRAMA ENCERRADO')
+        case 1:
+            n1 = int(input('Digite um nro de 1 a 9 (0 cancela): '))
+            while 0 > n1 or n1 > 9:
+                n1 = int(input('ERRO\nInsira um nro entre 1 e 9 (0 cancela): ')) 
+            resp = tabuada(n1)
+        case 2:
+            peso = float(input('Insira seu peso(kg): '))
+            altura = float(input('Insira sua altura(m): '))
+            resp = imc(peso, altura)
+        case 3:
+            nro = int(input('Digite um nro: '))
+            while nro <= 0:
+                nro = int(input('Digite um nro maior que 0: '))
+            resp = fatorial(nro)
+        case _:
+            print('ESCOLHA UM NRO QUE ESTÁ NO MENU')
+    opcao = int(input('MENU DE EXERCICIOS\n==================\n[1]TABUADA\n[2]IMC\n[3]FATORIAL\n[-1]ENCERRA PROGRAMA\nESCOLHA: '))  
