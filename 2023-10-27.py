@@ -96,7 +96,10 @@ def tabuada(n):
         print('PROGRAMA CANCELADO\n')
 
 def imc(p, h):
+    if h > 3:
+        h = h / 100
     result = p / (h**2)
+    print(f'PESO: {p:.1f} kg\nALTURA: {h:.2f} m')
     print(f'Seu IMC: {result:.2f}\n')
 
 def fatorial(n):
