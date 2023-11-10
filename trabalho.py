@@ -1,63 +1,39 @@
 '''
-Fazer um algoritmo que leia a idade e o nome de 30 pessoas 
-(o algoritmo não deve permitir valores inválidos). Os valores 
-lidos devem ser armazenados em um vetor. Após a leitura de todos os valores, encontre: 
-
-a) a média das idades; 
-b) a quantidade de pessoas que possuem idade acima da média; 
-c) o nome das pessoas que possuem idade abaixo da média; 
-d) o nome da pessoa mais velha e da mais nova; 
-e) para cada número lido, mostre uma tabela contendo o valor lido e o fatorial deste valor.
+Faça um programa que use a função valorPagamento para determinar o valor a ser pago por uma
+prestação de uma conta. O programa deverá solicitar ao usuário o valor da prestação e o número
+de dias em atraso e passar estes valores para a função valorPagamento, que calculará o valor a
+ser pago e devolverá este valor ao programa que a chamou. O programa deverá então exibir o
+valor a ser pago na tela. Após a execução o programa deverá voltar a pedir outro valor de
+prestação e assim continuar até que seja informado um valor igual a zero para a prestação. Neste
+momento o programa deverá ser encerrado, exibindo o relatório do dia, que conterá a
+quantidade e o valor total de prestações pagas no dia. O cálculo do valor a ser pago é feito da
+seguinte forma: para pagamentos sem atraso, cobrar o valor da prestação, e quando houver
+atraso, cobrar 3% de multa, mais 0,1% de juros por dia de atraso.
 '''
+def valorPagamento(p, a):
+    valorFinal = 0
+    if a == 0:
+        valorFinal = p
+    else:
+        valorFinal = p * 1.03
+        for i in range(a):
+            valorFinal *= 1.001
+    print(f'{valorFinal:.2f}')
+    return valorFinal
 
-def exA(idade):
-    soma = 0
-    cont = 0
-    for i in range(len(idade)):
-        soma += idade[i]
+condicao= True
+cont = 0
+qtd = 0.0
+
+while condicao:
+    prest = float(input('Insira o valor da(s) prestação(ões): R$'))
+    if prest == 0:
+        print('=====PROGRAMA ENCERRADO=====\nRESULTADOS:')
+        print(f'Quantidade de prestações pagas: {cont}')
+        print(f'Valor total das prestações do dia: R${qtd:.2f}')
+        condicao = False
+    else:
+        dias = int(input('Insira quantos dias houveram de atraso: '))
+        x = valorPagamento(prest, dias)
+        qtd += x
         cont += 1
-    media = soma / cont
-    return media
-
-def exB(media, idade):
-    cont = 0
-    for i in range(len(idade)):
-        if idade[i] > media:
-            cont += 1
-    return cont
-
-def exC(nome, idade, media):
-    AdM = []
-    for i in range(len(nome)):
-        if idade[i] < media:
-            AdM.append(nome[i])
-    return AdM
-
-def exD(n, idd):
-    maior = idd[0]
-    Imaior = 0
-    menor = idd[0]
-    Imenor = 0
-    for i in range(len(idd)):
-        if idd[i] > maior:
-            maior = idd[i]
-            Imaior = i
-        elif idd[i] < menor:
-            menor = idd[i]
-            Imenor = i
-    resp = (f'Mais velho(a): {n[Imaior]}\nMais novo(a): {n[Imenor]}')
-    return resp
-
-nomes = []
-idades = []
-for i in range(30):
-    nomes.append(input(f'Insira o nome da pessoa {i+1}'))
-    idades.append(input(f'Insira a idade da pessoa {i+1}'))
-    while idades[i] < 0:
-        idades.append(input(f'IDADE INVÁLIDA\nInsira novamente a idade da pessoa {i+1}'))
-
-a = exA(idades)
-b = exB(a, idades)
-c = exC(nomes, idades, a)
-d = exD(nomes, idades)
-e = exE(idades)
