@@ -37,3 +37,48 @@ while condicao:
         x = valorPagamento(prest, dias)
         qtd += x
         cont += 1
+
+'''
+A MODA de um vetor de números é o número no vetor que é repetido com maior frequência.
+Se mais de um número for repetido com frequência máxima igual, não existirá uma moda.
+Escreva uma função que aceite um vetor de números e retorne a moda ou uma indicação de que
+a moda não existe
+'''
+
+def modaVetor(vet):
+    vet2 = []
+    vet3 = []
+    for i in range(len(vet)):
+        if vet[i] not in vet2:
+            vet2.append(vet[i])
+    
+    for i in range(len(vet2)):
+        cont = 0
+        for i in range(len(vet)):
+            if vet2[i] == vet[i]:
+                cont += 1
+        vet3.append(cont)
+    moda = 0
+    for i in range(len(vet3)):
+        if vet3[i] > moda:
+            moda = vet3[i]
+            posicao = i
+
+    for i in range(len(vet3)):
+        if i != posicao:
+            if moda == vet3[i]:
+                print('A moda não existe')
+    
+    if moda != 'A moda não existe':
+        print(f'A moda do vetor é {vet2[posicao]}')
+
+
+vet = []
+tam = int(input('Insira quantos numeros serão inseridos no vetor: '))
+while tam < 1:
+    tam = int(input('Insira quantos numeros serão inseridos no vetor: '))
+
+for i in range(tam):
+    vet.append(int(input(f'Insira o {i+1}° numero: ')))
+
+modaVetor(vet)
