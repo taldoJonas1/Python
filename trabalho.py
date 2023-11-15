@@ -54,8 +54,8 @@ def modaVetor(vet):
     
     for i in range(len(vet2)):
         cont = 0
-        for i in range(len(vet)):
-            if vet2[i] == vet[i]:
+        for j in range(len(vet)):
+            if vet2[i] == vet[j]:
                 cont += 1
         vet3.append(cont)
     moda = 0
@@ -67,6 +67,7 @@ def modaVetor(vet):
     for i in range(len(vet3)):
         if i != posicao:
             if moda == vet3[i]:
+                moda = 'A moda não existe'
                 print('A moda não existe')
     
     if moda != 'A moda não existe':
