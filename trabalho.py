@@ -83,3 +83,16 @@ for i in range(tam):
     vet.append(int(input(f'Insira o {i+1}° numero: ')))
 
 modaVetor(vet)
+
+'''
+Fazer um programa que desenvolva um jogo para adivinhar uma palavra oculta. Será um jogo
+semelhante ao da forca, mas com algumas diferenças. Neste jogo, o jogador tenta adivinhar uma
+palavra oculta, mediante uma quantidade de tentativas limitada. Para isso, o programa escolhe,
+aleatoriamente, uma palavra de uma lista de palavras contidas em um arquivo e o jogador deve
+adivinhar a palavra. Essa lista deve conter, no mínimo, 10 palavras. A quantidade de tentativas
+também deve ser aleatória, em um intervalo de 6 a 11. Quando o jogador adivinha alguma letra,
+as letras correspondentes na palavra são reveladas. Além disso, deve ser informado também a
+quantidade de tentativas que ainda resta quando a letra for incorreta, mensagem caso já tenha
+tentado a letra, e outras situações para tornar o jogo mais interessante. O jogo finaliza quando o
+jogador adivinhar a palavra ou acabar as suas tentativas.
+'''
