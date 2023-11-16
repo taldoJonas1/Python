@@ -96,3 +96,93 @@ quantidade de tentativas que ainda resta quando a letra for incorreta, mensagem 
 tentado a letra, e outras situações para tornar o jogo mais interessante. O jogo finaliza quando o
 jogador adivinhar a palavra ou acabar as suas tentativas.
 '''
+import random
+
+frutas = ['abacaxi', 'uva', 'morango', 'melancia', 'banana', 'pera', 'maca', 'manga', 'acai', 'mamao', 'melao',
+          'kiwi', 'caju', 'acerola', 'jaca', 'pitanga', 'jabuticaba']
+animais = ['leao', 'tigre', 'leopardo', 'onca', 'elefante', 'rinoceronte', 'crocodilo', 'golfinho', 'baleia', 
+           'foca', 'orca', 'pinguim', 'gaviao', 'falcao', 'urubu', 'coruja']
+tipo = int(input('===ASSUNTO DO JOGO===\n\n[1]FRUTAS\n[2]ANIMAIS\nESCOLHA O ASSUNTO: '))
+while tipo != 1 and tipo != 2:
+    tipo = int(input('===ASSUNTO DO JOGO===\n\n[1]FRUTAS\n[2]ANIMAIS\nESCOLHA O ASSUNTO: '))
+
+if tipo == 1:
+    opcao = frutas
+elif tipo == 2:
+    opcao = animais
+
+palavra = random.choice(opcao)
+
+dificuldade = int(input('\n===DIFICULDADE DO JOGO===\n\n[1]AMADOR(11 tentativas)\n[2]FACIL(10 tentativas)\
+                        \n[3]INTERMEDIÁRIO(9 tentativas)\n[4]DIFÍCIL(8 tentativas)\
+                        \n[5]IMPOSSÍVEL(7 tentativas)\n[6]HARDCORE(6 tentativas)\
+                        \nESCOLHA A DIFICULDADE: '))
+while dificuldade < 1 or dificuldade > 6:
+    print('\nE R R O\nREINSIRA A DIFICULDADE!\n')
+    dificuldade = int(input('\n===DIFICULDADE DO JOGO===\n\n[1]AMADOR(11 tentativas)\n[2]FACIL(10 tentativas)\
+                        \n[3]INTERMEDIÁRIO(9 tentativas)\n[4]DIFÍCIL(8 tentativas)\
+                        \n[5]IMPOSSÍVEL(7 tentativas)\n[6]HARDCORE(6 tentativas)\
+                        \nESCOLHA A DIFICULDADE: '))
+if dificuldade == 1:
+    tent = 11
+elif dificuldade == 2:
+    tent = 10
+elif dificuldade == 3:
+    tent = 9
+elif dificuldade == 4:
+    tent = 8
+elif dificuldade == 5:
+    tent = 7
+elif dificuldade == 6:
+    tent = 6
+
+palavra_oculta = '_'*len(palavra)
+
+print('\n===JOGO INICIADO===\n')
+max = tent
+while tent > 0:
+    print(f'Palavra: {palavra_oculta}\n')
+    palpite = ''
+    print(f'TENTATIVAS RESTANTES: {tent}')
+    if tent == max:
+        opcaoChute = 0
+    else:
+        opcaoChute = int(input('\n[0]DAR OUTRO PALPITE\n[1]TENTAR ACERTAR A PALAVRA (SE ERRAR É FIM DE JOGO)'))
+        while opcaoChute != 0 and opcaoChute != 1:
+            opcaoChute = int(input('\n\n==OPÇÃO INVÁLIDA==\n[0]DAR OUTRO PALPITE\n[1]TENTAR ACERTAR A PALAVRA (SE ERRAR É FIM DE JOGO)\nESCOLHA: '))
+
+    if opcaoChute == 1:
+        chute = input('PALPITE A PALAVRA, É AGORA OU NUNCA: ').lower()
+        palavra_oculta = chute
+        if palavra_oculta == palavra:
+            print('PARABÉNS, VOCÊ ACERTOU!!!!')
+            tent = 0
+        else:
+            print('GAME OVER! MELHORE')
+            tent = 0
+
+    elif opcaoChute == 0:
+        palpite = input('DÊ UM PALPITE: ').lower()
+        while len(palpite) > 1:
+            palpite = input('===INSIRA APENAS UMA LETRA===\nDÊ UM PALPITE: ').lower()
+        if palpite in palavra:
+            nova = ''
+            for i in range(len(palavra)):
+                if palavra[i] == palpite:
+                    nova += palpite
+                elif palavra_oculta[i] != '_':
+                    nova += palavra_oculta[i]
+                else:
+                    nova += '_'
+            palavra_oculta = nova
+                    
+            print(f'A letra "{palpite}" está na palavra.')
+        else:
+            print(f'Infelizmente a palavra não contém a letra "{palpite}"')
+        tent -= 1
+        
+        if palavra_oculta == palavra:
+            print('PARABÉNS, VOCÊ ACERTOU!!!!')
+            tent = 0
+        elif palavra_oculta != palavra and tent == 0:
+            print('GAME OVER! MELHORE')
